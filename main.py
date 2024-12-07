@@ -37,7 +37,7 @@ bot = Client(
     bot_token=BOT_TOKEN
 )
 
-bot.on_message(filters.command(["start"]))
+@bot.on_message(filters.command(["start"]))
 async def account_login(bot: Client, m: Message):
     editable = await m.reply_text(
        f"𝐇𝐞𝐥𝐥𝐨 ❤️\n\n◆〓◆ ❖ ANKIT ❖ ™ ◆〓◆\n\n❈ I Am A Bot For Download Links From Your **.TXT** File And Then Upload That File Om Telegram So Basically If You Want To Use Me First Send Me ⟰ /upload Command And Then Follow Few Steps..", reply_markup=InlineKeyboardMarkup(
@@ -277,19 +277,9 @@ async def account_login(bot: Client, m: Message):
     time.sleep(2)
 
 
-    if failed_links:
-     error_file_send = await m.reply_text("**📤 Sending you Failed Downloads List **")
-     with open("failed_downloads.txt", "w") as f:
-        for link in failed_links:
-            f.write(link + "\n")
-    # After writing to the file, send it
-     await m.reply_document(document="failed_downloads.txt", caption=fail_cap)
-     await error_file_send.delete()
-     failed_links.clear()
-     os.remove(f'failed_downloads.txt')
-    await m.reply_text("🔰Done🔰")
-    await m.reply_text("**✨Thanks for Choosing**")
-    processing_request = False  # Reset the processing flag  
+    except Exception as e:
+        await m.reply_text(e)
+    await m.reply_text("🔰Done🔰")  
 
 
 
