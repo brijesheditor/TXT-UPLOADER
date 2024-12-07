@@ -47,8 +47,6 @@ image_urls = [
     # Add more image URLs as needed
 ]
 
-
-
 @bot.on_message(filters.command(["start"]))
 async def start_command(bot: Client, message: Message):
     # Choose a random image URL from the list
@@ -93,45 +91,6 @@ async def run_bot(bot: Client, m: Message):
             f.write('\n'.join(videos))
         await m.reply_document(document=txt_file,caption="Here is your txt file.")
         os.remove(txt_file)
-
-
-
-def is_subscription_expired(user_id):
-    with open("Subscription_data.txt", "r") as file:
-        for line in file:
-            data = line.strip().split(", ")
-            if int(data[0]) == user_id:
-                end_date = datetime.datetime.strptime(data[2], "%d-%m-%Y") #%Y-%m-%d
-                today = datetime.datetime.today()
-                return end_date < today
-    return True  # User not found in Subscription_data.txt or no subscription data found
-
-
-
-# Define the myplan command handler
-@bot.on_message(filters.command("myplan"))
-async def myplan_command_handler(bot, message):
-    user_id = message.from_user.id
-    with open("Subscription_data.txt", "r") as file:
-        for line in file:
-            data = line.strip().split(", ")
-            if int(data[0]) == user_id:
-                subscription_start = data[1]
-                expiration_date = data[2]
-                today = datetime.datetime.today()
-                if today > datetime.datetime.strptime(expiration_date, "%d-%m-%Y"):
-                    plan = "EXPIRED "
-                    response_text = f"**✨ User ID: {user_id}\n📊 PLAN STAT : {plan}\n\n🔰 Activated on : {subscription_start}\n🧨 Expiration Date: {expiration_date} \n\n 🫰🏼 ACTIVATE YOUR PLAN NOW ! \n⚡️ TO ACTIVATE MESSAGE : @ITS_NOT_ROMEO :D **"
-                else:
-                    plan = "ALIVE!"  
-                    response_text = f"**✨ User ID: {user_id}\n📊 PLAN STAT : {plan}\n🔰 Activated on : {subscription_start}\n🧨 Expiration Date: {expiration_date}**"
-                await message.reply(response_text)
-                return
-    if user_id in auth_users:
-        await message.reply("YOU HAVE LIFE TIME ACCESS :) ")
-    else:
-        await message.reply("No subscription data found for you.")
-
 
 @bot.on_message(filters.command("stop"))
 async def restart_handler(_, m):
