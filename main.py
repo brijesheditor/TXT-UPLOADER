@@ -35,62 +35,36 @@ bot = Client("bot",
              api_id= 22100695,
              api_hash= "0e8f93300ccbbcd56066e6d790b0d3b2"
 
+bot.on_message(filters.command(["start"]))
+async def account_login(bot: Client, m: Message):
+    editable = await m.reply_text(
+       f"𝐇𝐞𝐥𝐥𝐨 ❤️\n\n◆〓◆ ❖ ANKIT ❖ ™ ◆〓◆\n\n❈ I Am A Bot For Download Links From Your **.TXT** File And Then Upload That File Om Telegram So Basically If You Want To Use Me First Send Me ⟰ /upload Command And Then Follow Few Steps..", reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton("✜ 𝐉𝐨𝐢𝐧 𝐔𝐩𝐃𝐚𝐭𝐞 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 ✜" ,url=f"https://t.me/ANKIT_SHAKYA_OFFICIAL") ],
+                    [
+                    InlineKeyboardButton("✜ 𝗔𝗻𝗸𝗶𝘁𝗦𝗵𝗮𝗸𝘆𝗮 ✜" ,url="https://t.me/ANKIT_SHAKYA73") ],
+                    [
+                    InlineKeyboardButton("🦋 𝐅𝐨𝐥𝐥𝐨𝐰 𝐌𝐞 🦋" ,url="https://t.me/ANKIT_SHAKYA_OFFICIAL") ]                               
+            ]))
+
+
 @bot.on_message(filters.command("stop"))
 async def restart_handler(_, m):
-    
-        if failed_links:
-         error_file_send = await m.reply_text("**📤 Sending you Failed Downloads List Before Stoping   **")
-         with open("failed_downloads.txt", "w") as f:
-          for link in failed_links:
-            f.write(link + "\n")
-    # After writing to the file, send it
-         await m.reply_document(document="failed_downloads.txt", caption=fail_cap)
-         await error_file_send.delete()
-         os.remove(f'failed_downloads.txt')
-         failed_links.clear()
-         processing_request = False  # Reset the processing flag
-         #await m.reply_text("**Note This Is BETA Stage May have Bugs  **")
-         await m.reply_text("🚦**STOPPED**🚦", True)
-         os.execl(sys.executable, sys.executable, *sys.argv)
-        else:
-         processing_request = False  # Reset the processing flag
-         #await m.reply_text("**Note This Is BETA Stage May have Bugs  **")
-         await m.reply_text("🚦**STOPPED**🚦", True)
-         os.execl(sys.executable, sys.executable, *sys.argv)
-   
+    await m.reply_text("𝐒𝐓𝐎𝐏𝐄𝐃🚦", True)
+    os.execl(sys.executable, sys.executable, *sys.argv)
 
-@bot.on_message(filters.command("restart"))
-async def restart_handler(_, m):
-   
-     processing_request = False  # Reset the processing flag
-     await m.reply_text("🤖**Restarting Bot **🤖", True)
-     os.execl(sys.executable, sys.executable, *sys.argv)
-    
 
-@bot.on_message(filters.command(["drm"]))
+
+@bot.on_message(filters.command(["upload"]))
 async def account_login(bot: Client, m: Message):
-    global processing_request
-    if m.from_user.id not in auth_users:
-            await m.reply_text("** YOU ARE NOT IN ADMIN LIST **",reply_markup=keyboard)
-            return
+    editable = await m.reply_text('𝐀𝐦 𝐏𝐨𝐰𝐞𝐫𝐟𝐮𝐥𝐥 𝐓𝐗𝐓 𝐃𝐨𝐧𝐰𝐥𝐨𝐚𝐝𝐞𝐫 📥 𝐁𝐨𝐭. 𝐒𝐞𝐧𝐝 𝐌𝐞 𝐓𝐡𝐞 𝐓𝐗𝐓 𝐅𝐢𝐥𝐞𝐬 𝐀𝐧𝐝 𝐖𝐚𝐢𝐭 ⏍')
+    input: Message = await bot.listen(editable.chat.id)
+    x = await input.download()
+    await input.delete(True)
 
-    if processing_request:
-            await m.reply_text("**🫨 I'm currently processing another request.\n Please try again later.**",reply_markup=Busy)
-            return
-    else:
-        
-        editable = await m.reply_text(f"**➠ 𝐒𝐞𝐧𝐝 𝐌𝐞 𝐘𝐨𝐮𝐫 𝐓𝐗𝐓 𝐅𝐢𝐥𝐞 𝐢𝐧 𝐀 𝐏𝐫𝐨𝐩𝐞𝐫 𝐖𝐚𝐲 \n\n➠ TXT FORMAT : LINK : URL \n➠ 𝐌𝐨𝐝𝐢𝐟𝐢𝐞𝐝 𝐁𝐲:  @EX_DOLPHIN **")
-        input: Message = await bot.listen(editable.chat.id)
-        editable = await editable.edit(f"**⚙️PROCESSING INPUT.......**")
-
-        if input.document:
-            processing_request = True
-            x = await input.download()        
-            await input.delete(True)
-            file_name, ext = os.path.splitext(os.path.basename(x))
-            credit = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
-            path = f"./downloads/{m.chat.id}"
-
+    path = f"./downloads/{m.chat.id}"
+  
             try:
                 links = []
                 videocount = 0
