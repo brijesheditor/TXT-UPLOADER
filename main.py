@@ -29,11 +29,14 @@ from bs4 import BeautifulSoup
 import datetime
 import aiohttp
 
-bot = Client("bot",
-             bot_token= "7830905185:AAECMKpAs_jVD3bF3p-obLiK6rMDvw3O0cw", 
-             #bot_token= os.environ.get("BOT_TOKEN"),
-             api_id= 22100695,
-             api_hash= "0e8f93300ccbbcd56066e6d790b0d3b2"
+# Initialize the bot
+bot = Client(
+    "bot",
+    api_id=API_ID,
+    api_hash=API_HASH,
+    bot_token=BOT_TOKEN
+)
+
 
 bot.on_message(filters.command(["start"]))
 async def account_login(bot: Client, m: Message):
