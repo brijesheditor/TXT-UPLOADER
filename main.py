@@ -35,8 +35,6 @@ bot = Client("bot",
              api_id= 22100695,
              api_hash= "0e8f93300ccbbcd56066e6d790b0d3b2"
 
-owner_id = 7341059064
-# Extras 
 failed_links = []  # List to store failed links
 fail_cap =f"**➜ This file Contain Failed Downloads while Downloding \n You Can Retry them one more time **"
 
