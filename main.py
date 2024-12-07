@@ -210,48 +210,24 @@ async def account_login(bot: Client, m: Message):
                     try:
                         ka = await helper.download(url, name)
                         copy = await bot.send_document(chat_id=m.chat.id,document=ka, caption=cc1)
-                        await copy.copy(chat_id = -1002097681261)
                         count+=1
                         os.remove(ka)
                         time.sleep(1)
-                    except FloodWait as e: 
+                    except FloodWait as e:
                         await m.reply_text(str(e))
                         time.sleep(e.x)
                         continue
+                
                 elif ".pdf" in url:
                     try:
-                        time.sleep(1)
-                        #prog = await m.reply_text(f"📥 **Downloading **\n\n**➭ Index » {str(count).zfill(3)} **\n**➭ File » ** `{name}`\n**➭ Link »** `{url}`\n\n✨ **Bot Made by Devansh**\n**━━━━━━━✦✗✦━━━━━━━**")
                         cmd = f'yt-dlp -o "{name}.pdf" "{url}"'
                         download_cmd = f"{cmd} -R 25 --fragment-retries 25"
                         os.system(download_cmd)
-                        time.sleep(1)
-                        #await prog.delete (True)
-                        start_time = time.time()
-                        reply = await m.reply_text(f"**⚡️ Starting Uploding ...** - `{name}`")
-                        time.sleep(1)
-                        if raw_text7 == "custom" :
-                           subprocess.run(['wget', thumb3, '-O', 'pdfthumb.jpg'], check=True)  
-                           thumbnail = "pdfthumb.jpg"
-                           copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', caption=cc1, thumb=thumbnail, progress=progress_bar, progress_args=(reply, start_time))
-                           os.remove(thumbnail)
-                        elif thumb == "no" and raw_text7 == "no":
-                        
-                             copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', caption=cc1, progress=progress_bar, progress_args=(reply, start_time))
-                        elif raw_text7 == "yes" and thumb != "no":
-                              subprocess.run(['wget', thumb2, '-O', 'thumb1.jpg'], check=True)  # Fixing this line
-                              thumbnail = "thumb1.jpg"
-                              copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', caption=cc1,thumb=thumbnail, progress=progress_bar, progress_args=(reply, start_time))
-                        else:
-                            subprocess.run(['wget', thumb2, '-O', 'thumb1.jpg'], check=True)  
-                            thumbnail = "thumb1.jpg"
-                            copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', caption=cc1, thumb=thumbnail, progress=progress_bar, progress_args=(reply, start_time))
-                        await reply.delete (True)
-                        os.remove(f'{name}.pdf')
+                        copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', caption=cc1)
                         count += 1
-                        time.sleep(2)
+                        os.remove(f'{name}.pdf')
                     except FloodWait as e:
-                        #await m.reply_text(str(e))
+                        await m.reply_text(str(e))
                         time.sleep(e.x)
                         continue
 
@@ -271,11 +247,6 @@ async def account_login(bot: Client, m: Message):
                 failed_links.append(f"{name1} : {url}")
                 count += 1
                 continue
-
-    except Exception as e:
-        await m.reply_text(e)
-    time.sleep(2)
-
 
     except Exception as e:
         await m.reply_text(e)
