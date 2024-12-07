@@ -6,7 +6,6 @@ import os
 import requests
 import time
 from p_bar import progress_bar
-from vars import LOG
 import aiohttp
 import tgcrypto
 import aiofiles
