@@ -35,18 +35,6 @@ bot = Client("bot",
              api_id= 22100695,
              api_hash= "0e8f93300ccbbcd56066e6d790b0d3b2"
 
-@bot.on_message(filters.command(["logs"]) )
-async def send_logs(bot: Client, m: Message):
-    try:
-        
-        # Assuming `assist.txt` is located in the current directory
-         with open("Assist.txt", "rb") as file:
-            sent= await m.reply_text("**📤 Sending you ....**")
-            await m.reply_document(document=file)
-            await sent.delete(True)
-    except Exception as e:
-        await m.reply_text(f"Error sending logs: {e}")
-
 
 # List of image URLs
 image_urls = [
