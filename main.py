@@ -147,7 +147,7 @@ async def account_login(bot: Client, m: Message):
         count = int(raw_text)
         
     try:
-        for i in range(count - 1, int(input9.text)):
+        for i in range(count - 1, len(links)):
         #for i in range(count - 1, len(links)):    
 
             V = links[i][1].replace("file/d/","uc?export=download&id=")\
