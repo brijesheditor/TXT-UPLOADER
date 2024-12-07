@@ -35,35 +35,6 @@ bot = Client("bot",
              api_id= 22100695,
              api_hash= "0e8f93300ccbbcd56066e6d790b0d3b2"
 
-
-# List of image URLs
-image_urls = [
-    "https://graph.org/file/9dbe3901f43b11e98e6f0.jpg",
-    "https://graph.org/file/c5ec0a02be408b354d3fc.jpg",
-    "https://graph.org/file/c186818a566c501f14abf.jpg",
-    "https://graph.org/file/850ef256ede1370257b5d.jpg",
-    "https://graph.org/file/40700542e58889b5c42fe.jpg",
-    "https://graph.org/file/94a7875bb51006e7bd528.jpg",
-    # Add more image URLs as needed
-]
-
-@bot.on_message(filters.command(["start"]))
-async def start_command(bot: Client, message: Message):
-    # Choose a random image URL from the list
-    random_image_url = random.choice(image_urls)
-    
-    
-    # Caption for the image
-    caption = f"**𝐇𝐞𝐥𝐥𝐨 𝐃𝐞𝐚𝐫  👋!\n\n➠ 𝐈 𝐚𝐦 𝐚 𝐓𝐞𝐱𝐭 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐞𝐫 𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐖𝐢𝐭𝐡 ♥️\n➠ Can Extract Videos & Pdf Form Your Text File and Upload to Telegram\n\n➠ 𝐔𝐬𝐞 /drm 𝐂𝐨𝐦𝐦𝐚𝐧𝐝 𝐓𝐨 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝 𝐅𝐫𝐨𝐦 𝐓𝐗𝐓 𝐅𝐢𝐥𝐞  \n\n➠𝐌𝐚𝐝𝐞 𝐁𝐲: @EX_DOLPHIN **\n"
-    
-    # Send the image with the caption
-    await bot.send_photo(
-        chat_id=message.chat.id,
-        photo=random_image_url,
-        caption=caption,
-        reply_markup=keyboard
-    )
-
 @bot.on_message(filters.command('h2t'))
 async def run_bot(bot: Client, m: Message):
     user_id = m.from_user.id
