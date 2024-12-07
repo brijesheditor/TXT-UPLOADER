@@ -18,7 +18,7 @@ from logger import logging
 import time
 import asyncio
 from pyrogram.types import User, Message
-from config import *
+from vars import API_ID, API_HASH, BOT_TOKEN
 import sys
 import os
 import random
