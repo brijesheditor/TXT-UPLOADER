@@ -56,8 +56,6 @@ async def restart_handler(_, m):
     await m.reply_text("𝐒𝐓𝐎𝐏𝐄𝐃🚦", True)
     os.execl(sys.executable, sys.executable, *sys.argv)
 
-
-
 @bot.on_message(filters.command(["upload"]))
 async def account_login(bot: Client, m: Message):
     editable = await m.reply_text('𝐀𝐦 𝐏𝐨𝐰𝐞𝐫𝐟𝐮𝐥𝐥 𝐓𝐗𝐓 𝐃𝐨𝐧𝐰𝐥𝐨𝐚𝐝𝐞𝐫 📥 𝐁𝐨𝐭. 𝐒𝐞𝐧𝐝 𝐌𝐞 𝐓𝐡𝐞 𝐓𝐗𝐓 𝐅𝐢𝐥𝐞𝐬 𝐀𝐧𝐝 𝐖𝐚𝐢𝐭 ⏍')
@@ -66,66 +64,28 @@ async def account_login(bot: Client, m: Message):
     await input.delete(True)
 
     path = f"./downloads/{m.chat.id}"
-  
-            try:
-                links = []
-                videocount = 0
-                pdfcount = 0
-                with open(x, "r", encoding="utf-8") as f:
-                    for line in f:
-                        link = line.strip().split("://", 1)
-                        links.append(link)
-                        if ".pdf" in link[1]:
-                            pdfcount += 1 
-                        else:
-                            videocount += 1
-            except Exception as e:
-                await m.reply_text("Error occurred while processing the file.🥲")
-                print("Error:", e)
-                os.remove(x)
-                processing_request = False  # Reset the processing flag
-                return
 
-        else:
-            content = input.text
-            content = content.split("\n")
-            links = []
-            videocount = 0
-            pdfcount = 0
-
-            for i in content:
-                link = i.split("://", 1)
-                links.append(link)
-                if ".pdf" in link[1]:
-                    pdfcount += 1 
-                else:
-                    videocount += 1
-    await editable.edit(f"**Total links found are : {len(links)}\n┃\n┠ Total Video Count : {videocount}\n┠ Total Pdf Count: {pdfcount}  \n┠ Send From where you want to download initial is  : `1` \n┃\n┠ Send `stop` If don't want to Contine \n┖ Bot By : @ITS_NOT_ROMEO**" )
+    try:
+       with open(x, "r") as f:
+           content = f.read()
+       content = content.split("\n")
+       links = []
+       for i in content:
+           links.append(i.split("://", 1))
+       os.remove(x)
+            # print(len(links)
+    except:
+           await m.reply_text("∝ 𝐈𝐧𝐯𝐚𝐥𝐢𝐝 𝐟𝐢𝐥𝐞 𝐢𝐧𝐩𝐮𝐭.")
+           os.remove(x)
+           return
+    
+   
+    await editable.edit(f"∝ 𝐓𝐨𝐭𝐚𝐥 𝐋𝐢𝐧𝐤 𝐅𝐨𝐮𝐧𝐝 𝐀𝐫𝐞 🔗** **{len(links)}**\n\n𝐒𝐞𝐧𝐝 𝐅𝐫𝐨𝐦 𝐖𝐡𝐞𝐫𝐞 𝐘𝐨𝐮 𝐖𝐚𝐧𝐭 𝐓𝐨 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝 𝐈𝐧𝐢𝐭𝐚𝐥 𝐢𝐬 **1**")
     input0: Message = await bot.listen(editable.chat.id)
     raw_text = input0.text
     await input0.delete(True)
-    if raw_text.lower() == "stop":
-        await editable.edit(f"**Task Stoped ! **")
-        await input0.delete(True)
-        processing_request = False  # Reset the processing flag
-        os.remove(x)
-        return
-    
 
-    await editable.edit(f"**ENTER TILL WHERE YOU WANT TO DOWNLOAD \n┃\n┠ Starting Dowload Form : `{raw_text}`\n┖ Last Index Of Links is : `{len(links)}` **")
-    input9: Message = await bot.listen(editable.chat.id)
-    raw_text9 = input9.text
-    
-    if int(input9.text) > len(links) :
-        await editable.edit(f"**PLZ ENTER NUMBER IN RANGE OF INDEX COUNT    **")
-        processing_request = False  # Reset the processing flag
-        await m.reply_text("**Exiting Task......  **")
-        return
-    else: await input9.delete(True)
-    
-
-
-    await editable.edit("**Enter Batch Name or send d for grabbing from text filename.**")
+    await editable.edit("**Enter Your Batch Name or send d for grabing from text filename.**")
     input1: Message = await bot.listen(editable.chat.id)
     raw_text0 = input1.text
     await input1.delete(True)
@@ -133,55 +93,51 @@ async def account_login(bot: Client, m: Message):
         b_name = file_name
     else:
         b_name = raw_text0
+    
 
-
-    # await editable.edit("**Enter resolution \n SEND 1 for 720p \n 2 for 480 \n 3 for 360 \n 4 for 240**")
-    await editable.edit("**Enter resolution \n SEND 1 for 720p \n 2 for 480 \n 3 for 360 \n 4 for 240**")
+    await editable.edit("∝ 𝐄𝐧𝐭𝐞𝐫 𝐄𝐞𝐬𝐨𝐥𝐮𝐭𝐢𝐨𝐧 🎬\n☞ 144,240,360,480,720,1080\nPlease Choose Quality")
     input2: Message = await bot.listen(editable.chat.id)
     raw_text2 = input2.text
-    quality = input2.text
     await input2.delete(True)
+    try:
+        if raw_text2 == "144":
+            res = "256x144"
+        elif raw_text2 == "240":
+            res = "426x240"
+        elif raw_text2 == "360":
+            res = "640x360"
+        elif raw_text2 == "480":
+            res = "854x480"
+        elif raw_text2 == "720":
+            res = "1280x720"
+        elif raw_text2 == "1080":
+            res = "1920x1080" 
+        else: 
+            res = "UN"
+    except Exception:
+            res = "UN"
     
     
-    await editable.edit("**Enter Your Name or send `de` for use default**")
+
+    await editable.edit("**Enter Your Name or send 'de' for use default.\n Eg : 𝐀𝐍𝐊𝐈𝐓 𝐒𝐇𝐀𝐊𝐘𝐀™👨🏻‍💻**")
     input3: Message = await bot.listen(editable.chat.id)
     raw_text3 = input3.text
     await input3.delete(True)
     if raw_text3 == 'de':
-        CR = "@ITS_NOT_ROMEO"
+        CR = credit
     else:
         CR = raw_text3
-
-
-    await editable.edit("**🖼 Thumbnail \n\n• Custom Thumbnail : Use @vtelegraphbot and send me link \n• If you don't want Send :  `no` **")  
+   
+    await editable.edit("🌄 Now send the Thumb url\nEg » https://graph.org/file/419c60736fbac058c9e5.jpg\n\n Or if don't want thumbnail send = no")
     input6 = message = await bot.listen(editable.chat.id)
     raw_text6 = input6.text
     await input6.delete(True)
-    #await editable.delete()
+    await editable.delete()
+
     thumb = input6.text
-    thumb2 = input6.text
-
-    await editable.edit("**⚡️ Thumnail in PDF too ? \n\n• If need Same thumb on pdf as video send : `yes` \nNOTE : if you have given stumb for Video then only use this   \n• SEND `no` If you dont want to add \n\n• Want other thumbnail ? \n\n• Send `custom`  IF need Different thubnail for pdf **")  
-    input7 = message = await bot.listen(editable.chat.id)
-    raw_text7 = input7.text.lower()  # Convert to lowercase
-    await input7.delete(True)
-    
-
-    if raw_text7 == "custom":
-     await editable.edit("**Send URl of Pdf Thumbanil **")  
-     input8 = message = await bot.listen(editable.chat.id)
-     raw_text8 = input8.text.lower()  # Convert to lowercase
-     await input8.delete(True)
-     await editable.delete()
-     thumb3 = input8.text 
-
-    else: await editable.delete() 
-      
-    
     if thumb.startswith("http://") or thumb.startswith("https://"):
-        # getstatusoutput(f"wget '{thumb}' -O 'thumb.jpg'")
-        getstatusoutput(f"wget {thumb} -O thumb1.jpg")
-        thumb = "thumb1.jpg"
+        getstatusoutput(f"wget '{thumb}' -O 'thumb.jpg'")
+        thumb = "thumb.jpg"
     else:
         thumb == "no"
 
@@ -189,7 +145,7 @@ async def account_login(bot: Client, m: Message):
         count = 1
     else:
         count = int(raw_text)
-  
+        
     try:
         for i in range(count - 1, int(input9.text)):
         #for i in range(count - 1, len(links)):    
