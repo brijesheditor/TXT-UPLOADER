@@ -37,7 +37,6 @@ bot = Client(
     bot_token=BOT_TOKEN
 )
 
-
 bot.on_message(filters.command(["start"]))
 async def account_login(bot: Client, m: Message):
     editable = await m.reply_text(
