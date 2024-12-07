@@ -258,11 +258,11 @@ async def account_login(bot: Client, m: Message):
                 else:
                     prog = await m.reply_text(f"📥 **Downloading **\n\n**➭ Count » {str(count).zfill(3)} **\n**➭ Video Name » ** `{name}`\n**➭ Quality** » `{raw_text2}`\n**➭ Video Url »** `{url}`\n\n✨ **Bot Made by @EX_DOLPHIN**\n**━━━━━━━✦✗✦━━━━━━━**")
                     time.sleep(2)
-                    res_file = await helper.drm_download_video(url,quality, name,key)
+                    res_file = await helper.drm_download_video(url,cmd, name,key)
                     filename = res_file
                     await prog.delete(True)
                     time.sleep(1)
-                    await helper.send_vid(bot, m, cc, filename, thumb, name, thumb2)
+                    await helper.send_vid(bot, m, cc, filename, thumb, name, prog)
                     count += 1
                     
 
