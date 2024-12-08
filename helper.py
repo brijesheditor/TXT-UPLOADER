@@ -242,7 +242,7 @@ async def get_drm_keys(url: str):
     mpd_url, key = await Penpencil.get_mpd_keys_title(url)
     return key
 
-async def drm_download_video(url, quality, name, keys):
+async def drm_download_video(url, cmd, name, keys):
 
     print(keys)
     keys = keys.split(":")
