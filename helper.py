@@ -252,7 +252,7 @@ async def drm_download_video(url, qual, name, keys):
     key1, key2 = keys
 
 
-    elif qual =="1":
+    elif qual == "1":
         nqual == "240"
 
     elif qual == "2":
