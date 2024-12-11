@@ -180,7 +180,7 @@ async def account_login(bot: Client, m: Message):
                     print(url)
                 
             if "/master.mpd" in url:
-                cmd= f" yt-dlp -k --allow-unplayable-formats -f bestvideo.{raw_text2} --fixup never {url} "
+                cmd= f" yt-dlp -k --allow-unplayable-formats -f bestvideo.{quality} --fixup never {url} "
                 print("counted")
             if "youtu" in url:
                 ytf = f"b[height<={raw_text2}][ext=mp4]/bv[height<={raw_text2}][ext=mp4]+ba[ext=m4a]/b[ext=mp4]"
@@ -234,7 +234,7 @@ async def account_login(bot: Client, m: Message):
                 else:
                     prog = await m.reply_text(f"📥 **Downloading **\n\n**➭ Count » {str(count).zfill(3)} **\n**➭ Video Name » ** `{name}`\n**➭ Quality** » `{raw_text2}`\n**➭ Video Url »** `{url}`\n\n✨ **Bot Made by @EX_DOLPHIN**\n**━━━━━━━✦✗✦━━━━━━━**")
                     time.sleep(2)
-                    res_file = await helper.drm_download_video(url,name, keys)
+                    res_file = await helper.drm_download_video(url,qual, name, keys)
                     filename = res_file
                     await prog.delete(True)
                     time.sleep(1)
