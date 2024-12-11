@@ -19,7 +19,7 @@ import re
 
 
 # pw_token = os.environ.get("token")
-pw_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzQzMjAwMTUuNzM4LCJkYXRhIjp7Il9pZCI6IjY0ZTZmMjgwZmM0N2JjMDAxOGFmNTQ2MiIsInVzZXJuYW1lIjoiODkyNDg3MDY4NiIsImZpcnN0TmFtZSI6Ikd1bmphbiIsImxhc3ROYW1lIjoiIiwib3JnYW5pemF0aW9uIjp7Il9pZCI6IjVlYjM5M2VlOTVmYWI3NDY4YTc5ZDE4OSIsIndlYnNpdGUiOiJwaHlzaWNzd2FsbGFoLmNvbSIsIm5hbWUiOiJQaHlzaWNzd2FsbGFoIn0sInJvbGVzIjpbIjViMjdiZDk2NTg0MmY5NTBhNzc4YzZlZiJdLCJjb3VudHJ5R3JvdXAiOiJJTiIsInR5cGUiOiJVU0VSIn0sImlhdCI6MTczMzcxNTIxNX0.vzHWs1P3tMSR-Jiqhg1Srq5hANPUye0kMkHy0pvfNl0"
+pw_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzI5Mzg2MTYuNTc5LCJkYXRhIjp7Il9pZCI6IjY0ZTZmMjgwZmM0N2JjMDAxOGFmNTQ2MiIsInVzZXJuYW1lIjoiODkyNDg3MDY4NiIsImZpcnN0TmFtZSI6Ikd1bmphbiIsImxhc3ROYW1lIjoiIiwib3JnYW5pemF0aW9uIjp7Il9pZCI6IjVlYjM5M2VlOTVmYWI3NDY4YTc5ZDE4OSIsIndlYnNpdGUiOiJwaHlzaWNzd2FsbGFoLmNvbSIsIm5hbWUiOiJQaHlzaWNzd2FsbGFoIn0sInJvbGVzIjpbIjViMjdiZDk2NTg0MmY5NTBhNzc4YzZlZiJdLCJjb3VudHJ5R3JvdXAiOiJJTiIsInR5cGUiOiJVU0VSIn0sImlhdCI6MTczMjMzMzgxNn0.Wd5AVELE3jwf18QKu781YcXSScqpQdDGEMuHk274IZ4"
 
 def duration(filename):
     result = subprocess.run([
@@ -242,7 +242,7 @@ async def get_drm_keys(url: str):
     mpd_url, key = await Penpencil.get_mpd_keys_title(url)
     return key
 
-async def drm_download_video(url, quality, name, keys):
+async def drm_download_video(url, qual, name, keys):
 
     print(keys)
     keys = keys.split(":")
@@ -252,19 +252,19 @@ async def drm_download_video(url, quality, name, keys):
     key1, key2 = keys
 
 
-    if quality =="1":
-        nqual="720"
+    elif qual =="1":
+        nqual == "240"
 
-    elif quality=="2":
-        nqual= "480" 
+    elif qual == "2":
+        nqual == "300" 
 
-    elif quality =="3":
-        nqual="360"
+    elif qual == "3":
+        nqual == "480"
 
-    elif quality=="4":
-        nqual="240"
+    elif qual == "4":
+        nqual =="720"
     else :
-        nqual="480"                
+        nqual == "480"        
   
     try:
         # Get the directory of the current script
