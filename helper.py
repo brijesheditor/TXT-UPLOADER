@@ -242,7 +242,7 @@ async def get_drm_keys(url: str):
     mpd_url, key = await Penpencil.get_mpd_keys_title(url)
     return key
 
-async def drm_download_video(url, qual, name, keys):
+async def drm_download_video(url, cmd, name, keys):
 
     print(keys)
     keys = keys.split(":")
@@ -251,20 +251,33 @@ async def drm_download_video(url, qual, name, keys):
         return None
     key1, key2 = keys
 
+    time.sleep(2)
+    download_cmd = f'{cmd} -R infinite --fragment-retries 25 --socket-timeout 50 --external-downloader aria2c --downloader-args "aria2c: -x 16 -j 32" --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"'
+    global failed_counter
+    print(download_cmd)
+    logging.info(download_cmd)
+    k = subprocess.run(download_cmd, shell=True)
+    if "visionias" in cmd and k.returncode != 0 and failed_counter <= 10:
+        failed_counter += 1
+        await asyncio.sleep(5)
+        await download_video(url, cmd, name)
+    failed_counter = 0
+    try:
+        if os.path.isfile(name):
+            return name
+        elif os.path.isfile(f"{name}.webm"):
+            return f"{name}.webm"
+        name = name.split(".")[0]
+        if os.path.isfile(f"{name}.mkv"):
+            return f"{name}.mkv"
+        elif os.path.isfile(f"{name}.mp4"):
+            return f"{name}.mp4"
+        elif os.path.isfile(f"{name}.mp4.webm"):
+            return f"{name}.mp4.webm"
 
-    if qual == "1":
-        nqual == "240"
-
-    if qual == "2":
-        nqual == "300" 
-
-    if qual == "3":
-        nqual == "480"
-
-    if qual == "4":
-        nqual =="720"
-    else :
-        nqual == "480"        
+        return name
+    except FileNotFoundError as exc:
+        return os.path.isfile.splitext[0] + "." + "mp4"        
   
     try:
         # Get the directory of the current script
