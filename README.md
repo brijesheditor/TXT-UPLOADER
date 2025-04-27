@@ -1,7 +1,8 @@
-# txt uploader
+# BRIJESH TXT TO VIDEO UPLOADER 
 
-# Made By Devansh
+# MADE BY 𝐌𝐑 𝐁𝐑𝐈𝐉𝐄𝐒𝐇 😇
 
+# DEPLOY TO RENDER OR KOYEB 
 
 ## DEPLOY TO HEROKU
 
